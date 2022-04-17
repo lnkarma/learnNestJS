@@ -11,16 +11,27 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.UserService = void 0;
 const common_1 = require("@nestjs/common");
+const runtime_1 = require("@prisma/client/runtime");
 const prisma_service_1 = require("../prisma/prisma.service");
 let UserService = class UserService {
     constructor(prisma) {
         this.prisma = prisma;
     }
     async create(dto) {
-        const user = await this.prisma.user.create({
-            data: dto,
-        });
-        return { user, token: 'jwt' };
+        try {
+            const user = await this.prisma.user.create({
+                data: dto,
+            });
+            return { user, token: 'jwt' };
+        }
+        catch (error) {
+            if (error instanceof runtime_1.PrismaClientKnownRequestError) {
+                if (error.code === 'P2002') {
+                    throw new common_1.ForbiddenException('Credentials taken');
+                }
+            }
+            throw error;
+        }
     }
     findAll() {
         return `This action returns all user`;
