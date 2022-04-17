@@ -4,7 +4,7 @@ import { UpdateUserDto } from './dto/update-user.dto';
 export declare class UserService {
     private prisma;
     constructor(prisma: PrismaService);
-    create(dto: CreateUserDto): import(".prisma/client").Prisma.Prisma__UserClient<import(".prisma/client").User>;
+    create(dto: CreateUserDto): any;
     findAll(): string;
     findOne(id: number): string;
     update(id: number, updateUserDto: UpdateUserDto): string;
