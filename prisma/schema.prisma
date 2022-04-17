@@ -15,6 +15,8 @@ model User {
   email String  @unique
   name  String?
   posts Post[]
+
+  isEmailVerified Boolean @default(false)
 }
 
 model Post {

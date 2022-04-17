@@ -9,4 +9,5 @@ export const user: User = {
   id: '123',
   name: null,
   ...createUserDto,
+  isEmailVerified: false,
 };

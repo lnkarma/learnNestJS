@@ -10,4 +10,5 @@ export const updatedUser: User = {
   name: null,
   email: 'old@example.com',
   ...updateUserDto,
+  isEmailVerified: false,
 };
