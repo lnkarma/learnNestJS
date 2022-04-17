@@ -1,10 +1,10 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { PrismaService } from 'src/prisma/prisma.service';
-import { CreateUserDto } from './dto/create-user.dto';
 import { UserService } from './user.service';
 import { mockDeep } from 'jest-mock-extended';
-import { PrismaClient, User } from '@prisma/client';
-import { UpdateUserDto } from './dto/update-user.dto';
+import { PrismaClient } from '@prisma/client';
+import { createUserDto, user } from './mocks/create-user.mock';
+import { updatedUser, updateUserDto } from './mocks/update-user.mock';
 
 const prismaClientMock = mockDeep<PrismaClient>();
 
@@ -33,16 +33,7 @@ describe('UserService', () => {
   });
 
   describe('Create user', () => {
-    const createUserDto: CreateUserDto = {
-      email: 'test@example.com',
-    };
-
     it('should create a user', async () => {
-      const user: User = {
-        id: '123',
-        name: null,
-        ...createUserDto,
-      };
       prismaClientMock.user.create.mockResolvedValueOnce(user);
       const result = await service.create(createUserDto);
       expect(prismaClientMock.user.create).toHaveBeenCalledWith({
@@ -53,18 +44,7 @@ describe('UserService', () => {
   });
 
   describe('Update user', () => {
-    const updateUserDto: UpdateUserDto = {
-      email: 'test@example.com',
-    };
-
-    const updatedUser: User = {
-      id: '123',
-      name: null,
-      email: 'old@example.com',
-      ...updateUserDto,
-    };
-
-    it('should prisma user update method', async () => {
+    it('should call prisma user update method', async () => {
       prismaClientMock.user.update.mockResolvedValueOnce(updatedUser);
       await service.update('123', updateUserDto);
       expect(prismaClientMock.user.update).toHaveBeenCalled();

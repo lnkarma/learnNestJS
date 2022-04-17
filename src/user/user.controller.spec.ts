@@ -1,8 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { User } from '@prisma/client';
 import { PrismaService } from 'src/prisma/prisma.service';
-import { CreateUserDto } from './dto/create-user.dto';
-import { UpdateUserDto } from './dto/update-user.dto';
+import { createUserDto, user } from './mocks/create-user.mock';
+import { updatedUser, updateUserDto } from './mocks/update-user.mock';
 import { UserController } from './user.controller';
 import { UserService } from './user.service';
 
@@ -37,55 +36,37 @@ describe('UserController', () => {
   });
 
   describe('Create user', () => {
-    const dto: CreateUserDto = {
-      email: 'test@example.com',
-    };
-    const user = {
-      id: '123',
-      name: null,
-      ...dto,
-    };
-
     it('should have create method', () => {
       expect(controller.create).toBeDefined();
     });
 
     it('should call create service', async () => {
       userServiceCreateSpy.mockResolvedValueOnce(user);
-      await controller.create(dto);
-      expect(userService.create).toHaveBeenCalledWith(dto);
+      await controller.create(createUserDto);
+      expect(userService.create).toHaveBeenCalledWith(createUserDto);
     });
 
     it('should return new user', async () => {
       userServiceCreateSpy.mockResolvedValueOnce(user);
-      const result = await controller.create(dto);
+      const result = await controller.create(createUserDto);
       expect(result).toEqual(user);
     });
   });
 
   describe('edit user', () => {
-    const dto: UpdateUserDto = {
-      email: '',
-    };
-    const updatedUser: User = {
-      id: '123',
-      name: null,
-      email: 'old@example.com',
-      ...dto,
-    };
     it('should have update method', () => {
       expect(controller.update).toBeDefined();
     });
 
     it('should call service update method', async () => {
       userServiceUpdateSpy.mockResolvedValueOnce(updatedUser);
-      await controller.update('123', dto);
+      await controller.update('123', updateUserDto);
       expect(userService.update).toHaveBeenCalled();
     });
 
     it('should retrun the result from user service update method', async () => {
       userServiceUpdateSpy.mockResolvedValueOnce(updatedUser);
-      const result = await controller.update('123', dto);
+      const result = await controller.update('123', updateUserDto);
       expect(result).toEqual(updatedUser);
     });
   });
