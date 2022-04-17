@@ -3,6 +3,7 @@ tasks:
   - before: |
       npm i -g @nestjs/cli
       sudo apt install sqlite3
+      gp env DATABASE_URL="file:./dev.db"
     init: yarn install # runs during prebuild
     command: |
       yarn start:dev
