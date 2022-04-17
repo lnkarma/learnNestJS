@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1650190080957" clover="3.2.0">
-  <project timestamp="1650190080957" name="All files">
-    <metrics statements="63" coveredstatements="35" conditionals="0" coveredconditionals="0" methods="19" coveredmethods="9" elements="82" coveredelements="44" complexity="0" loc="63" ncloc="63" packages="5" files="12" classes="12"/>
+<coverage generated="1650211386387" clover="3.2.0">
+  <project timestamp="1650211386387" name="All files">
+    <metrics statements="105" coveredstatements="45" conditionals="2" coveredconditionals="0" methods="28" coveredmethods="9" elements="135" coveredelements="54" complexity="0" loc="105" ncloc="105" packages="6" files="15" classes="15"/>
     <package name="src">
-      <metrics statements="20" coveredstatements="9" conditionals="0" coveredconditionals="0" methods="4" coveredmethods="3"/>
+      <metrics statements="22" coveredstatements="9" conditionals="0" coveredconditionals="0" methods="4" coveredmethods="3"/>
       <file name="app.controller.ts" path="/workspace/learnNestJS/src/app.controller.ts">
         <metrics statements="6" coveredstatements="6" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
         <line num="1" count="1" type="stmt"/>
@@ -29,12 +29,14 @@
         <line num="6" count="1" type="stmt"/>
       </file>
       <file name="main.ts" path="/workspace/learnNestJS/src/main.ts">
-        <metrics statements="5" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
+        <metrics statements="7" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
         <line num="1" count="0" type="stmt"/>
         <line num="2" count="0" type="stmt"/>
-        <line num="5" count="0" type="stmt"/>
+        <line num="3" count="0" type="stmt"/>
         <line num="6" count="0" type="stmt"/>
+        <line num="7" count="0" type="stmt"/>
         <line num="8" count="0" type="stmt"/>
+        <line num="10" count="0" type="stmt"/>
       </file>
     </package>
     <package name="src.prisma">
@@ -56,7 +58,7 @@
       </file>
     </package>
     <package name="src.user">
-      <metrics statements="29" coveredstatements="19" conditionals="0" coveredconditionals="0" methods="12" coveredmethods="6"/>
+      <metrics statements="62" coveredstatements="22" conditionals="2" coveredconditionals="0" methods="21" coveredmethods="6"/>
       <file name="user.controller.ts" path="/workspace/learnNestJS/src/user/user.controller.ts">
         <metrics statements="16" coveredstatements="13" conditionals="0" coveredconditionals="0" methods="6" coveredmethods="3"/>
         <line num="1" count="1" type="stmt"/>
@@ -76,6 +78,35 @@
         <line num="39" count="1" type="stmt"/>
         <line num="40" count="0" type="stmt"/>
       </file>
+      <file name="user.e2e-spec.ts" path="/workspace/learnNestJS/src/user/user.e2e-spec.ts">
+        <metrics statements="26" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="9" coveredmethods="0"/>
+        <line num="1" count="0" type="stmt"/>
+        <line num="2" count="0" type="stmt"/>
+        <line num="3" count="0" type="stmt"/>
+        <line num="4" count="0" type="stmt"/>
+        <line num="5" count="0" type="stmt"/>
+        <line num="6" count="0" type="stmt"/>
+        <line num="8" count="0" type="stmt"/>
+        <line num="11" count="0" type="stmt"/>
+        <line num="12" count="0" type="stmt"/>
+        <line num="15" count="0" type="stmt"/>
+        <line num="16" count="0" type="stmt"/>
+        <line num="17" count="0" type="stmt"/>
+        <line num="20" count="0" type="stmt"/>
+        <line num="21" count="0" type="stmt"/>
+        <line num="24" count="0" type="stmt"/>
+        <line num="25" count="0" type="stmt"/>
+        <line num="26" count="0" type="stmt"/>
+        <line num="29" count="0" type="stmt"/>
+        <line num="30" count="0" type="stmt"/>
+        <line num="39" count="0" type="stmt"/>
+        <line num="40" count="0" type="stmt"/>
+        <line num="43" count="0" type="stmt"/>
+        <line num="49" count="0" type="stmt"/>
+        <line num="53" count="0" type="stmt"/>
+        <line num="54" count="0" type="stmt"/>
+        <line num="60" count="0" type="stmt"/>
+      </file>
       <file name="user.module.ts" path="/workspace/learnNestJS/src/user/user.module.ts">
         <metrics statements="4" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
         <line num="1" count="0" type="stmt"/>
@@ -84,23 +115,33 @@
         <line num="9" count="0" type="stmt"/>
       </file>
       <file name="user.service.ts" path="/workspace/learnNestJS/src/user/user.service.ts">
-        <metrics statements="9" coveredstatements="6" conditionals="0" coveredconditionals="0" methods="6" coveredmethods="3"/>
+        <metrics statements="16" coveredstatements="9" conditionals="2" coveredconditionals="0" methods="6" coveredmethods="3"/>
         <line num="1" count="2" type="stmt"/>
         <line num="2" count="2" type="stmt"/>
-        <line num="7" count="2" type="stmt"/>
-        <line num="8" count="11" type="stmt"/>
-        <line num="11" count="1" type="stmt"/>
-        <line num="17" count="0" type="stmt"/>
-        <line num="21" count="0" type="stmt"/>
-        <line num="25" count="2" type="stmt"/>
-        <line num="32" count="0" type="stmt"/>
+        <line num="3" count="2" type="stmt"/>
+        <line num="8" count="2" type="stmt"/>
+        <line num="9" count="13" type="stmt"/>
+        <line num="12" count="3" type="stmt"/>
+        <line num="13" count="3" type="stmt"/>
+        <line num="18" count="3" type="stmt"/>
+        <line num="20" count="0" type="cond" truecount="0" falsecount="1"/>
+        <line num="21" count="0" type="cond" truecount="0" falsecount="1"/>
+        <line num="22" count="0" type="stmt"/>
+        <line num="25" count="0" type="stmt"/>
+        <line num="30" count="0" type="stmt"/>
+        <line num="34" count="0" type="stmt"/>
+        <line num="38" count="2" type="stmt"/>
+        <line num="45" count="0" type="stmt"/>
       </file>
     </package>
     <package name="src.user.dto">
-      <metrics statements="4" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      <metrics statements="7" coveredstatements="7" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
       <file name="create-user.dto.ts" path="/workspace/learnNestJS/src/user/dto/create-user.dto.ts">
-        <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <metrics statements="4" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
         <line num="1" count="1" type="stmt"/>
+        <line num="3" count="1" type="stmt"/>
+        <line num="6" count="1" type="stmt"/>
+        <line num="10" count="1" type="stmt"/>
       </file>
       <file name="update-user.dto.ts" path="/workspace/learnNestJS/src/user/dto/update-user.dto.ts">
         <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
@@ -114,6 +155,19 @@
       <file name="user.entity.ts" path="/workspace/learnNestJS/src/user/entities/user.entity.ts">
         <metrics statements="1" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
         <line num="1" count="0" type="stmt"/>
+      </file>
+    </package>
+    <package name="src.user.mocks">
+      <metrics statements="4" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      <file name="create-user.mock.ts" path="/workspace/learnNestJS/src/user/mocks/create-user.mock.ts">
+        <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="4" count="2" type="stmt"/>
+        <line num="8" count="2" type="stmt"/>
+      </file>
+      <file name="update-user.mock.ts" path="/workspace/learnNestJS/src/user/mocks/update-user.mock.ts">
+        <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="4" count="2" type="stmt"/>
+        <line num="8" count="2" type="stmt"/>
       </file>
     </package>
   </project>
