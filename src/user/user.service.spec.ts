@@ -33,13 +33,18 @@ describe('UserService', () => {
   });
 
   describe('Create user', () => {
-    it('should create a user', async () => {
+    it('should call prisma user create method', async () => {
       prismaClientMock.user.create.mockResolvedValueOnce(user);
-      const result = await service.create(createUserDto);
+      await service.create(createUserDto);
       expect(prismaClientMock.user.create).toHaveBeenCalledWith({
         data: { ...createUserDto },
       });
-      expect(result.email).toBe(createUserDto.email);
+    });
+
+    it('should return a user', async () => {
+      prismaClientMock.user.create.mockResolvedValueOnce(user);
+      const result = await service.create(createUserDto);
+      expect(result).toBe(user);
     });
   });
 
