@@ -38,7 +38,7 @@ describe('UserService', () => {
 
     it('should create a user', async () => {
       const user = {
-        id: 123,
+        id: '123',
         name: null,
         ...createUserDto,
       };
