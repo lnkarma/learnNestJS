@@ -16,10 +16,11 @@ let UserService = class UserService {
     constructor(prisma) {
         this.prisma = prisma;
     }
-    create(dto) {
-        return this.prisma.user.create({
+    async create(dto) {
+        const user = await this.prisma.user.create({
             data: dto,
         });
+        return { user, token: 'jwt' };
     }
     findAll() {
         return `This action returns all user`;

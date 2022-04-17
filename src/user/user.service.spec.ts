@@ -44,7 +44,13 @@ describe('UserService', () => {
     it('should return a user', async () => {
       prismaClientMock.user.create.mockResolvedValueOnce(user);
       const result = await service.create(createUserDto);
-      expect(result).toBe(user);
+      expect(result).toHaveProperty('user', user);
+    });
+
+    it('should return a token', async () => {
+      prismaClientMock.user.create.mockResolvedValueOnce(user);
+      const result = await service.create(createUserDto);
+      expect(result).toHaveProperty('token');
     });
   });
 

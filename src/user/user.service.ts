@@ -7,10 +7,13 @@ import { UpdateUserDto } from './dto/update-user.dto';
 export class UserService {
   constructor(private prisma: PrismaService) {}
 
-  create(dto: CreateUserDto) {
-    return this.prisma.user.create({
+  async create(dto: CreateUserDto) {
+    const user = await this.prisma.user.create({
       data: dto,
     });
+
+    // TODO: token should be signed jwt token
+    return { user, token: 'jwt' };
   }
 
   findAll() {
