@@ -1,4 +1,5 @@
 import { Test, TestingModule } from '@nestjs/testing';
+import { User } from '@prisma/client';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
@@ -66,13 +67,26 @@ describe('UserController', () => {
     const dto: UpdateUserDto = {
       email: '',
     };
+    const updatedUser: User = {
+      id: '123',
+      name: null,
+      email: 'old@example.com',
+      ...dto,
+    };
     it('should have update method', () => {
       expect(controller.update).toBeDefined();
     });
 
     it('should call service update method', async () => {
+      userServiceUpdateSpy.mockResolvedValueOnce(updatedUser);
       await controller.update('123', dto);
       expect(userService.update).toHaveBeenCalled();
+    });
+
+    it('should retrun the result from user service update method', async () => {
+      userServiceUpdateSpy.mockResolvedValueOnce(updatedUser);
+      const result = await controller.update('123', dto);
+      expect(result).toEqual(updatedUser);
     });
   });
 });
