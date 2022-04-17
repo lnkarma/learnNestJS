@@ -11,3 +11,18 @@ tasks:
 ports:
   - port: 3000
     onOpen: ignore
+
+vscode:
+  extensions:
+    - bierner.emojisense
+    - dracula-theme.theme-dracula
+    - dbaeumer.vscode-eslint
+    - mhutchie.git-graph
+    - codezombiech.gitignore
+    - christian-kohler.npm-intellisense
+    - esbenp.prettier-vscode
+    - TabNine.tabnine-vscode
+    - rangav.vscode-thunder-client
+    - qcz.text-power-tools
+    - PKief.material-icon-theme
+    - Prisma.prisma
