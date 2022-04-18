@@ -12,7 +12,7 @@ export class PrismaService extends PrismaClient implements OnModuleInit {
         },
       },
     });
-    console.log(config);
+    console.log('DATABASE_URL', config.get('DATABASE_URL'));
   }
 
   async onModuleInit() {

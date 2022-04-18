@@ -22,7 +22,7 @@ let PrismaService = class PrismaService extends client_1.PrismaClient {
                 },
             },
         });
-        console.log(config);
+        console.log('DATABASE_URL', config.get('DATABASE_URL'));
     }
     async onModuleInit() {
         await this.$connect();

@@ -13,7 +13,7 @@ const app_service_1 = require("./app.service");
 const user_module_1 = require("./user/user.module");
 const prisma_module_1 = require("./prisma/prisma.module");
 const config_1 = require("@nestjs/config");
-const joi_1 = require("joi");
+const Joi = require("joi");
 let AppModule = class AppModule {
 };
 AppModule = __decorate([
@@ -21,8 +21,8 @@ AppModule = __decorate([
         imports: [
             config_1.ConfigModule.forRoot({
                 isGlobal: true,
-                validationSchema: joi_1.default.object({
-                    DATABASE_URL: joi_1.default.string().required(),
+                validationSchema: Joi.object({
+                    DATABASE_URL: Joi.string().required(),
                 }),
             }),
             user_module_1.UserModule,
