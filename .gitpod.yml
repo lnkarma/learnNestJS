@@ -6,7 +6,6 @@ tasks:
       sudo apt install sqlite3
     init: yarn install # runs during prebuild
     command: |
-      gp env DATABASE_URL="file:./dev.db"
       yarn start:dev
     env:
       DATABASE_URL: 'file:./dev.db'
