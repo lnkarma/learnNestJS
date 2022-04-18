@@ -1,9 +1,14 @@
+import { ConfigModule, ConfigService } from '@nestjs/config';
 import { Test, TestingModule } from '@nestjs/testing';
+import { PrismaClient } from '@prisma/client';
+import { mockDeep } from 'jest-mock-extended';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { createUserDto, user } from './mocks/create-user.mock';
 import { updatedUser, updateUserDto } from './mocks/update-user.mock';
 import { UserController } from './user.controller';
 import { UserService } from './user.service';
+
+const prismaClientMock = mockDeep<PrismaClient>();
 
 describe('UserController', () => {
   let controller: UserController;
@@ -23,9 +28,19 @@ describe('UserController', () => {
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
+      imports: [ConfigModule.forRoot({ isGlobal: true })],
       controllers: [UserController],
       providers: [UserService, PrismaService],
-    }).compile();
+    })
+      .overrideProvider(PrismaService)
+      .useClass(
+        class {
+          constructor() {
+            return prismaClientMock;
+          }
+        },
+      )
+      .compile();
 
     controller = module.get<UserController>(UserController);
     userService = module.get<UserService>(UserService);
