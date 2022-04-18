@@ -3,12 +3,11 @@
 tasks:
   - before: |
       npm i -g @nestjs/cli
+      npm install -g dotenv-cli
       sudo apt install sqlite3
     init: yarn install # runs during prebuild
     command: |
       yarn start:dev
-    env:
-      DATABASE_URL: 'file:./dev.db'
 # List the ports to expose. Learn more https://www.gitpod.io/docs/config-ports/
 ports:
   - port: 3000
