@@ -2,8 +2,7 @@
 # List the start up tasks. Learn more https://www.gitpod.io/docs/config-start-tasks/
 tasks:
   - before: |
-      npm i -g @nestjs/cli
-      npm install -g dotenv-cli
+      npm i -g @nestjs/cli dotenv-cli
       sudo apt install sqlite3
     init: yarn install # runs during prebuild
     command: |
