@@ -8,7 +8,8 @@ tasks:
     command: |
       gp env DATABASE_URL="file:./dev.db"
       yarn start:dev
-
+    env:
+      DATABASE_URL: 'file:./dev.db'
 # List the ports to expose. Learn more https://www.gitpod.io/docs/config-ports/
 ports:
   - port: 3000

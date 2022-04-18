@@ -1,4 +1,5 @@
 import { INestApplication, ValidationPipe } from '@nestjs/common';
+import { ConfigModule } from '@nestjs/config';
 import { Test } from '@nestjs/testing';
 import { PrismaClient } from '@prisma/client';
 import { PrismaModule } from 'src/prisma/prisma.module';
@@ -10,7 +11,11 @@ let app: INestApplication;
 
 beforeAll(async () => {
   const module = await Test.createTestingModule({
-    imports: [UserModule, PrismaModule],
+    imports: [
+      ConfigModule.forRoot({ isGlobal: true }),
+      UserModule,
+      PrismaModule,
+    ],
   }).compile();
   app = module.createNestApplication();
   app.useGlobalPipes(new ValidationPipe());
