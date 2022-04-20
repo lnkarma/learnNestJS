@@ -52,6 +52,10 @@ describe('UserService', () => {
       const result = await service.create(createUserDto);
       expect(result).toHaveProperty('token');
     });
+
+    // it('should hash password if it is provided', async () => {
+    //   const result = await service.create(createUserDto);
+    // })
   });
 
   describe('Update user', () => {

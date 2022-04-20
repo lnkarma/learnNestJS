@@ -6,6 +6,11 @@ export const createUserDto: CreateUserDto = {
   email: 'test@example.com',
 };
 
+export const createUserDtoWithPassword: CreateUserDto = {
+  ...createUserDto,
+  password: 'password',
+};
+
 export const user: UserEntity = {
   id: '123',
   name: null,
