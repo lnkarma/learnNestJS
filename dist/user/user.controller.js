@@ -38,6 +38,7 @@ let UserController = class UserController {
     }
 };
 __decorate([
+    (0, common_1.UseInterceptors)(common_1.ClassSerializerInterceptor),
     (0, common_1.Post)(),
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),

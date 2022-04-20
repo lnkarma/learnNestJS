@@ -13,15 +13,16 @@ exports.UserService = void 0;
 const common_1 = require("@nestjs/common");
 const runtime_1 = require("@prisma/client/runtime");
 const prisma_service_1 = require("../prisma/prisma.service");
+const user_entity_1 = require("./entities/user.entity");
 let UserService = class UserService {
     constructor(prisma) {
         this.prisma = prisma;
     }
     async create(dto) {
         try {
-            const user = await this.prisma.user.create({
+            const user = new user_entity_1.UserEntity(await this.prisma.user.create({
                 data: dto,
-            });
+            }));
             return { user, token: 'jwt' };
         }
         catch (error) {

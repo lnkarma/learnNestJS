@@ -3,6 +3,7 @@ import { PrismaClientKnownRequestError } from '@prisma/client/runtime';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
+import { UserEntity } from './entities/user.entity';
 
 @Injectable()
 export class UserService {
@@ -10,9 +11,11 @@ export class UserService {
 
   async create(dto: CreateUserDto) {
     try {
-      const user = await this.prisma.user.create({
-        data: dto,
-      });
+      const user = new UserEntity(
+        await this.prisma.user.create({
+          data: dto,
+        }),
+      );
 
       // TODO: token should be signed jwt token
       return { user, token: 'jwt' };

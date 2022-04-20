@@ -4,6 +4,8 @@ import { Test } from '@nestjs/testing';
 import { PrismaClient } from '@prisma/client';
 import { PrismaModule } from 'src/prisma/prisma.module';
 import * as supertest from 'supertest';
+import { UserEntity } from './entities/user.entity';
+import { user } from './mocks/create-user.mock';
 import { UserModule } from './user.module';
 
 const prismaClient: PrismaClient = new PrismaClient();
@@ -56,7 +58,7 @@ describe('POST /users', () => {
   });
 
   it('should return user and token', async () => {
-    await supertest
+    const response = await supertest
       .agent(app.getHttpServer())
       .post('/user')
       .send({ email: 'test@example.com' })
@@ -64,5 +66,11 @@ describe('POST /users', () => {
       .expect('Content-Type', /json/)
       .on('response', (response: Response) => console.log(response.body))
       .expect(201);
+
+    expect(response.body.token).toBeDefined();
+    delete response.body.user.id;
+    const userWoId: Partial<UserEntity> = { ...user };
+    delete userWoId.id;
+    expect(response.body.user).toEqual(userWoId);
   });
 });

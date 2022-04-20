@@ -5,7 +5,7 @@ export declare class UserController {
     private readonly userService;
     constructor(userService: UserService);
     create(createUserDto: CreateUserDto): Promise<{
-        user: import(".prisma/client").User;
+        user: import("./entities/user.entity").UserEntity;
         token: string;
     }>;
     findAll(): string;
