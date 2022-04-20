@@ -3,8 +3,8 @@ import { PrismaService } from 'src/prisma/prisma.service';
 import { UserService } from './user.service';
 import { mockDeep } from 'jest-mock-extended';
 import { PrismaClient } from '@prisma/client';
-import { createUserDto, user } from './mocks/create-user.mock';
-import { updatedUser, updateUserDto } from './mocks/update-user.mock';
+import { createUserDto, prismaUser } from './mocks/create-user.mock';
+import { updatedPrismaUser, updateUserDto } from './mocks/update-user.mock';
 
 const prismaClientMock = mockDeep<PrismaClient>();
 
@@ -34,7 +34,7 @@ describe('UserService', () => {
 
   describe('Create user', () => {
     it('should call prisma user create method', async () => {
-      prismaClientMock.user.create.mockResolvedValueOnce(user);
+      prismaClientMock.user.create.mockResolvedValueOnce(prismaUser);
       await service.create(createUserDto);
       expect(prismaClientMock.user.create).toHaveBeenCalledWith({
         data: { ...createUserDto },
@@ -42,13 +42,13 @@ describe('UserService', () => {
     });
 
     it('should return a user', async () => {
-      prismaClientMock.user.create.mockResolvedValueOnce(user);
+      prismaClientMock.user.create.mockResolvedValueOnce(prismaUser);
       const result = await service.create(createUserDto);
-      expect(result).toHaveProperty('user', user);
+      expect(result).toHaveProperty('user', prismaUser);
     });
 
     it('should return a token', async () => {
-      prismaClientMock.user.create.mockResolvedValueOnce(user);
+      prismaClientMock.user.create.mockResolvedValueOnce(prismaUser);
       const result = await service.create(createUserDto);
       expect(result).toHaveProperty('token');
     });
@@ -56,15 +56,15 @@ describe('UserService', () => {
 
   describe('Update user', () => {
     it('should call prisma user update method', async () => {
-      prismaClientMock.user.update.mockResolvedValueOnce(updatedUser);
+      prismaClientMock.user.update.mockResolvedValueOnce(updatedPrismaUser);
       await service.update('123', updateUserDto);
       expect(prismaClientMock.user.update).toHaveBeenCalled();
     });
 
     it('should return the updated user', async () => {
-      prismaClientMock.user.update.mockResolvedValueOnce(updatedUser);
+      prismaClientMock.user.update.mockResolvedValueOnce(updatedPrismaUser);
       const result = await service.update('123', updateUserDto);
-      expect(result).toEqual(updatedUser);
+      expect(result).toEqual(updatedPrismaUser);
     });
   });
 });

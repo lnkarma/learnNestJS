@@ -1,3 +1,4 @@
+import { User } from '@prisma/client';
 import { UpdateUserDto } from '../dto/update-user.dto';
 import { UserEntity } from '../entities/user.entity';
 
@@ -11,4 +12,9 @@ export const updatedUser: UserEntity = {
   email: 'old@example.com',
   ...updateUserDto,
   isEmailVerified: false,
+};
+
+export const updatedPrismaUser: User = {
+  ...updatedUser,
+  password: null,
 };

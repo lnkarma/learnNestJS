@@ -1,3 +1,4 @@
+import { User } from '@prisma/client';
 import { CreateUserDto } from '../dto/create-user.dto';
 import { UserEntity } from '../entities/user.entity';
 
@@ -10,4 +11,9 @@ export const user: UserEntity = {
   name: null,
   ...createUserDto,
   isEmailVerified: false,
+};
+
+export const prismaUser: User = {
+  ...user,
+  password: null,
 };
