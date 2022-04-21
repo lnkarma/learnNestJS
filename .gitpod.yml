@@ -1,15 +1,22 @@
 ---
 # List the start up tasks. Learn more https://www.gitpod.io/docs/config-start-tasks/
 tasks:
-  - before: |
+  - name: test:e2e
+    before: |
       npm i -g @nestjs/cli dotenv-cli
       sudo apt install sqlite3
-    init: yarn install # runs during prebuild
+    init: |  # runs during prebuild
+      yarn install
+      gp sync-done install
     command: |
       yarn test:e2e
-  - command: |
+  - name: test:unit
+    command: |
+      gp sync-await install
       yarn test:watch
-  - command: |
+  - name: start:dev
+    command: |
+      gp sync-await install
       yarn start:dev
 # List the ports to expose. Learn more https://www.gitpod.io/docs/config-ports/
 ports:
