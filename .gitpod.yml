@@ -38,3 +38,4 @@ vscode:
     - PKief.material-icon-theme
     - Prisma.prisma
     - Orta.vscode-jest
+    - eamodio.gitlens
