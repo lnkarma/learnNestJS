@@ -5,15 +5,19 @@ import { mockDeep } from 'jest-mock-extended';
 import { PrismaClient } from '@prisma/client';
 import { createUserDto, prismaUser } from './mocks/create-user.mock';
 import { updatedPrismaUser, updateUserDto } from './mocks/update-user.mock';
+import { JwtService } from '@nestjs/jwt';
+import { IJwtTokenPayload } from './types/jwtToken.type';
 
+jest.mock('@nestjs/jwt');
 const prismaClientMock = mockDeep<PrismaClient>();
 
 describe('UserService', () => {
   let service: UserService;
+  let jwtService: JwtService;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
-      providers: [UserService, PrismaService],
+      providers: [UserService, PrismaService, JwtService],
     })
       .overrideProvider(PrismaService)
       .useClass(
@@ -26,6 +30,7 @@ describe('UserService', () => {
       .compile();
 
     service = module.get<UserService>(UserService);
+    jwtService = module.get<JwtService>(JwtService);
   });
 
   it('should be defined', () => {
@@ -53,9 +58,20 @@ describe('UserService', () => {
       expect(result).toHaveProperty('token');
     });
 
-    // it('should hash password if it is provided', async () => {
-    //   const result = await service.create(createUserDto);
-    // })
+    it('should return token from jwtSign method', async () => {
+      const signSpy = jest.spyOn(jwtService, 'sign');
+      prismaClientMock.user.create.mockResolvedValueOnce(prismaUser);
+      signSpy.mockReturnValueOnce('this should be the value of token');
+      const result = await service.create(createUserDto);
+      expect(result).toHaveProperty('token');
+      const expectedTokenPayload: IJwtTokenPayload = {
+        id: prismaUser.id,
+        email: prismaUser.email,
+      };
+      expect(jwtService.sign).toHaveBeenCalledWith(expectedTokenPayload);
+      expect(result.token).toBe('this should be the value of token');
+      signSpy.mockRestore();
+    });
   });
 
   describe('Update user', () => {
