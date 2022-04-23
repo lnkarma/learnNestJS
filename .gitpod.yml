@@ -7,8 +7,8 @@ tasks:
       sudo apt install sqlite3
     init: |  # runs during prebuild
       yarn install
-      gp sync-done install
     command: |
+      gp sync-done install
       yarn test:e2e
   - name: test:unit
     init: |
