@@ -11,12 +11,14 @@ tasks:
     command: |
       yarn test:e2e
   - name: test:unit
-    command: |
+    init: |
       gp sync-await install
+    command: |
       yarn test:watch
   - name: start:dev
-    command: |
+    init: |
       gp sync-await install
+    command: |
       yarn start:dev
 # List the ports to expose. Learn more https://www.gitpod.io/docs/config-ports/
 ports:
