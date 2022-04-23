@@ -1,4 +1,5 @@
 import { ConfigModule, ConfigService } from '@nestjs/config';
+import { JwtModule } from '@nestjs/jwt';
 import { Test, TestingModule } from '@nestjs/testing';
 import { PrismaClient } from '@prisma/client';
 import { mockDeep } from 'jest-mock-extended';
@@ -28,7 +29,16 @@ describe('UserController', () => {
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
-      imports: [ConfigModule.forRoot({ isGlobal: true })],
+      imports: [
+        ConfigModule.forRoot({ isGlobal: true }),
+        JwtModule.registerAsync({
+          imports: [ConfigModule],
+          useFactory: async (config: ConfigService) => ({
+            secret: config.get<string>('JWT_SECRET'),
+          }),
+          inject: [ConfigService],
+        }),
+      ],
       controllers: [UserController],
       providers: [UserService, PrismaService],
     })

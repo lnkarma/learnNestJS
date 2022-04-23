@@ -1,13 +1,15 @@
 import { ForbiddenException, Injectable } from '@nestjs/common';
+import { JwtService } from '@nestjs/jwt';
 import { PrismaClientKnownRequestError } from '@prisma/client/runtime';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { UserEntity } from './entities/user.entity';
+import { IJwtTokenPayload } from './types/jwtToken.type';
 
 @Injectable()
 export class UserService {
-  constructor(private prisma: PrismaService) {}
+  constructor(private prisma: PrismaService, private jwtService: JwtService) {}
 
   async create(dto: CreateUserDto) {
     try {
@@ -18,7 +20,13 @@ export class UserService {
       );
 
       // TODO: token should be signed jwt token
-      return { user, token: 'jwt' };
+      const tokenPayload: IJwtTokenPayload = {
+        id: user.id,
+        email: user.email,
+      };
+
+      const token = this.jwtService.sign(tokenPayload);
+      return { user, token };
     } catch (error) {
       if (error instanceof PrismaClientKnownRequestError) {
         if (error.code === 'P2002') {

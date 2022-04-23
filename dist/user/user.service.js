@@ -11,19 +11,26 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.UserService = void 0;
 const common_1 = require("@nestjs/common");
+const jwt_1 = require("@nestjs/jwt");
 const runtime_1 = require("@prisma/client/runtime");
 const prisma_service_1 = require("../prisma/prisma.service");
 const user_entity_1 = require("./entities/user.entity");
 let UserService = class UserService {
-    constructor(prisma) {
+    constructor(prisma, jwtService) {
         this.prisma = prisma;
+        this.jwtService = jwtService;
     }
     async create(dto) {
         try {
             const user = new user_entity_1.UserEntity(await this.prisma.user.create({
                 data: dto,
             }));
-            return { user, token: 'jwt' };
+            const tokenPayload = {
+                id: user.id,
+                email: user.email,
+            };
+            const token = this.jwtService.sign(tokenPayload);
+            return { user, token };
         }
         catch (error) {
             if (error instanceof runtime_1.PrismaClientKnownRequestError) {
@@ -52,7 +59,7 @@ let UserService = class UserService {
 };
 UserService = __decorate([
     (0, common_1.Injectable)(),
-    __metadata("design:paramtypes", [prisma_service_1.PrismaService])
+    __metadata("design:paramtypes", [prisma_service_1.PrismaService, jwt_1.JwtService])
 ], UserService);
 exports.UserService = UserService;
 //# sourceMappingURL=user.service.js.map
