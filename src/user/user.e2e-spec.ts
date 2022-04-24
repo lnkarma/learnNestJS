@@ -118,13 +118,24 @@ describe('POST /users', () => {
       });
   });
 
-  // it('should fail if valid password but no confirmPassword', async () => {
-  //   await supertest
-  //     .agent(app.getHttpServer())
-  //     .post('/user')
-  //     .send({ email: 'test@example.com', password: 'invalid password' })
-  //     .set('Accept', 'application/json')
-  //     .expect('Content-Type', /json/)
-  //     .expect(400);
-  // });
+  it('should return user without password', async () => {
+    const response = await supertest
+      .agent(app.getHttpServer())
+      .post('/user')
+      .send({
+        email: 'test@example.com',
+        password: 'Abcd@1234',
+        passwordConfirm: 'Abcd@1234',
+      })
+      .set('Accept', 'application/json')
+      .expect('Content-Type', /json/)
+      .on('response', (response: Response) => console.log(response.body))
+      .expect(201);
+
+    expect(response.body.token).toBeDefined();
+    delete response.body.user.id;
+    const userWoId: Optional<UserEntity, 'id'> = { ...user };
+    delete userWoId.id;
+    expect(response.body.user).toEqual(userWoId);
+  });
 });

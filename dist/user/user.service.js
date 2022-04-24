@@ -22,6 +22,7 @@ let UserService = class UserService {
     }
     async create(dto) {
         try {
+            delete dto.passwordConfirm;
             const user = new user_entity_1.UserEntity(await this.prisma.user.create({
                 data: dto,
             }));
@@ -33,6 +34,7 @@ let UserService = class UserService {
             return { user, token };
         }
         catch (error) {
+            console.log({ error });
             if (error instanceof runtime_1.PrismaClientKnownRequestError) {
                 if (error.code === 'P2002') {
                     throw new common_1.ForbiddenException('Credentials taken');
