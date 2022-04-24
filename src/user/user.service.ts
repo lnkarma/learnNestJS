@@ -13,13 +13,13 @@ export class UserService {
 
   async create(dto: CreateUserDto) {
     try {
+      delete dto.passwordConfirm;
       const user = new UserEntity(
         await this.prisma.user.create({
           data: dto,
         }),
       );
 
-      // TODO: token should be signed jwt token
       const tokenPayload: IJwtTokenPayload = {
         id: user.id,
         email: user.email,
@@ -28,6 +28,7 @@ export class UserService {
       const token = this.jwtService.sign(tokenPayload);
       return { user, token };
     } catch (error) {
+      console.log({ error });
       if (error instanceof PrismaClientKnownRequestError) {
         if (error.code === 'P2002') {
           throw new ForbiddenException('Credentials taken');

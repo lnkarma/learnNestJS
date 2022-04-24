@@ -9,6 +9,7 @@ export const createUserDto: CreateUserDto = {
 export const createUserDtoWithPassword: CreateUserDto = {
   ...createUserDto,
   password: 'password',
+  passwordConfirm: 'password',
 };
 
 export const user: UserEntity = {

@@ -1,21 +1,26 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { UserService } from './user.service';
-import { mockDeep } from 'jest-mock-extended';
+import { mockDeep, DeepMockProxy } from 'jest-mock-extended';
 import { PrismaClient } from '@prisma/client';
-import { createUserDto, prismaUser } from './mocks/create-user.mock';
+import {
+  createUserDto,
+  createUserDtoWithPassword,
+  prismaUser,
+} from './mocks/create-user.mock';
 import { updatedPrismaUser, updateUserDto } from './mocks/update-user.mock';
 import { JwtService } from '@nestjs/jwt';
 import { IJwtTokenPayload } from './types/jwtToken.type';
 
 jest.mock('@nestjs/jwt');
-const prismaClientMock = mockDeep<PrismaClient>();
 
 describe('UserService', () => {
   let service: UserService;
   let jwtService: JwtService;
+  let prismaClientMock: DeepMockProxy<PrismaClient>;
 
   beforeEach(async () => {
+    prismaClientMock = mockDeep<PrismaClient>();
     const module: TestingModule = await Test.createTestingModule({
       providers: [UserService, PrismaService, JwtService],
     })
@@ -71,6 +76,16 @@ describe('UserService', () => {
       expect(jwtService.sign).toHaveBeenCalledWith(expectedTokenPayload);
       expect(result.token).toBe('this should be the value of token');
       signSpy.mockRestore();
+    });
+
+    it('should call prisma user create method without passwordConfirm', async () => {
+      prismaClientMock.user.create.mockResolvedValueOnce(prismaUser);
+      await service.create(createUserDtoWithPassword);
+      const expectedPassedValue = { ...createUserDtoWithPassword };
+      delete expectedPassedValue.passwordConfirm;
+      expect(prismaClientMock.user.create).toHaveBeenCalledWith({
+        data: { ...expectedPassedValue },
+      });
     });
   });
 
