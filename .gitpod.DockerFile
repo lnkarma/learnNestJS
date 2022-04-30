@@ -1,4 +1,4 @@
-FROM gitpod/workspace-full:latest
+FROM gitpod/workspace-full
 FROM gitpod/workspace-mongodb
 
 RUN mkdir -p /workspace/mongodb/rs0-0  /workspace/mongodb/rs0-1 /workspace/mongodb/rs0-2
