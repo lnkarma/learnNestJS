@@ -3,7 +3,8 @@ image: gitpod/workspace-mongodb
 # List the start up tasks. Learn more https://www.gitpod.io/docs/config-start-tasks/
 tasks:
   - name: mongodb-start
-    before: mongod --replSet rs0 --port 27017 --bind_ip localhost --oplogSize 128
+    before: |
+      mongod --replSet rs0 --port 27017 --bind_ip localhost --oplogSize 128
   - name: start:dev
     before: |
       npm i -g @nestjs/cli dotenv-cli
@@ -23,6 +24,15 @@ tasks:
       gp sync-await install
     command: |
       yarn test:e2e
+  - name: mongodb-start
+    before: |
+      wget -qO - https://www.mongodb.org/static/pgp/server-5.0.asc | sudo apt-key add -
+      echo "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu focal/mongodb-org/5.0 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-5.0.list
+      sudo apt-get update
+      sudo apt-get install -y mongodb-mongosh
+    init: |
+      gp await-port 27017
+      mongosh --port 27017 --eval 'rs.initiate()'
 # List the ports to expose. Learn more https://www.gitpod.io/docs/config-ports/
 ports:
   - port: 3000
