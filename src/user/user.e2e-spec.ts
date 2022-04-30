@@ -58,7 +58,7 @@ describe('POST /users', () => {
     await supertest
       .agent(app.getHttpServer())
       .post('/users')
-      .send({ email: 'test1@example.com' });
+      .send({ email: 'test@example.com' });
     await supertest
       .agent(app.getHttpServer())
       .post('/users')
@@ -69,74 +69,74 @@ describe('POST /users', () => {
       .expect(403);
   });
 
-  // it('should return user and token', async () => {
-  //   const response = await supertest
-  //     .agent(app.getHttpServer())
-  //     .post('/users')
-  //     .send({ email: 'test@example.com' })
-  //     .set('Accept', 'application/json')
-  //     .expect('Content-Type', /json/)
-  //     .on('response', (response: Response) => console.log(response.body))
-  //     .expect(201);
+  it('should return user and token', async () => {
+    const response = await supertest
+      .agent(app.getHttpServer())
+      .post('/users')
+      .send({ email: 'test@example.com' })
+      .set('Accept', 'application/json')
+      .expect('Content-Type', /json/)
+      .on('response', (response: Response) => console.log(response.body))
+      .expect(201);
 
-  //   expect(response.body.token).toBeDefined();
-  //   delete response.body.user.id;
-  //   const userWoId: Optional<UserEntity, 'id'> = { ...user };
-  //   delete userWoId.id;
-  //   expect(response.body.user).toEqual(userWoId);
-  // });
+    expect(response.body.token).toBeDefined();
+    delete response.body.user.id;
+    const userWoId: Optional<UserEntity, 'id'> = { ...user };
+    delete userWoId.id;
+    expect(response.body.user).toEqual(userWoId);
+  });
 
-  // it('should fail if an invalid password is provided', async () => {
-  //   await supertest
-  //     .agent(app.getHttpServer())
-  //     .post('/users')
-  //     .send({
-  //       email: 'test@example.com',
-  //       password: 'invalid password',
-  //       passwordConfirm: 'invalid password',
-  //     })
-  //     .set('Accept', 'application/json')
-  //     .expect('Content-Type', /json/)
-  //     .expect(400)
-  //     .expect({
-  //       statusCode: 400,
-  //       message: ['password too weak'],
-  //       error: 'Bad Request',
-  //     });
-  // });
+  it('should fail if an invalid password is provided', async () => {
+    await supertest
+      .agent(app.getHttpServer())
+      .post('/users')
+      .send({
+        email: 'test@example.com',
+        password: 'invalid password',
+        passwordConfirm: 'invalid password',
+      })
+      .set('Accept', 'application/json')
+      .expect('Content-Type', /json/)
+      .expect(400)
+      .expect({
+        statusCode: 400,
+        message: ['password too weak'],
+        error: 'Bad Request',
+      });
+  });
 
-  // it('should fail if valid password but no confirmPassword', async () => {
-  //   await supertest
-  //     .agent(app.getHttpServer())
-  //     .post('/users')
-  //     .send({ email: 'test@example.com', password: 'Abcd@1234' })
-  //     .set('Accept', 'application/json')
-  //     .expect('Content-Type', /json/)
-  //     .expect({
-  //       statusCode: 400,
-  //       message: ['password does not match'],
-  //       error: 'Bad Request',
-  //     });
-  // });
+  it('should fail if valid password but no confirmPassword', async () => {
+    await supertest
+      .agent(app.getHttpServer())
+      .post('/users')
+      .send({ email: 'test@example.com', password: 'Abcd@1234' })
+      .set('Accept', 'application/json')
+      .expect('Content-Type', /json/)
+      .expect({
+        statusCode: 400,
+        message: ['password does not match'],
+        error: 'Bad Request',
+      });
+  });
 
-  // it('should return user without password', async () => {
-  //   const response = await supertest
-  //     .agent(app.getHttpServer())
-  //     .post('/users')
-  //     .send({
-  //       email: 'test@example.com',
-  //       password: 'Abcd@1234',
-  //       passwordConfirm: 'Abcd@1234',
-  //     })
-  //     .set('Accept', 'application/json')
-  //     .expect('Content-Type', /json/)
-  //     .on('response', (response: Response) => console.log(response.body))
-  //     .expect(201);
+  it('should return user without password', async () => {
+    const response = await supertest
+      .agent(app.getHttpServer())
+      .post('/users')
+      .send({
+        email: 'test@example.com',
+        password: 'Abcd@1234',
+        passwordConfirm: 'Abcd@1234',
+      })
+      .set('Accept', 'application/json')
+      .expect('Content-Type', /json/)
+      .on('response', (response: Response) => console.log(response.body))
+      .expect(201);
 
-  //   expect(response.body.token).toBeDefined();
-  //   delete response.body.user.id;
-  //   const userWoId: Optional<UserEntity, 'id'> = { ...user };
-  //   delete userWoId.id;
-  //   expect(response.body.user).toEqual(userWoId);
-  // });
+    expect(response.body.token).toBeDefined();
+    delete response.body.user.id;
+    const userWoId: Optional<UserEntity, 'id'> = { ...user };
+    delete userWoId.id;
+    expect(response.body.user).toEqual(userWoId);
+  });
 });
