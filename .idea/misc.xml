@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectRootManager" version="2" project-jdk-name="11" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/out" />
+  </component>
+  <component name="SwUserDefinedSpecifications">
+    <option name="specTypeByUrl">
+      <map />
+    </option>
+  </component>
+  <component name="UnattendedHostPersistenceState">
+    <option name="openedFilesInfos">
+      <list>
+        <OpenedFileInfo>
+          <option name="caretOffset" value="424" />
+          <option name="fileUrl" value="file://$PROJECT_DIR$/package.json" />
+        </OpenedFileInfo>
+        <OpenedFileInfo>
+          <option name="caretOffset" value="994" />
+          <option name="fileUrl" value="file://$PROJECT_DIR$/src/user/user.controller.ts" />
+        </OpenedFileInfo>
+        <OpenedFileInfo>
+          <option name="caretOffset" value="3793" />
+          <option name="fileUrl" value="file://$PROJECT_DIR$/src/user/user.service.spec.ts" />
+        </OpenedFileInfo>
+        <OpenedFileInfo>
+          <option name="caretOffset" value="692" />
+          <option name="fileUrl" value="file://$PROJECT_DIR$/test/app.e2e-spec.ts" />
+        </OpenedFileInfo>
+        <OpenedFileInfo>
+          <option name="caretOffset" value="576" />
+          <option name="fileUrl" value="file://$PROJECT_DIR$/src/user/user.module.ts" />
+        </OpenedFileInfo>
+        <OpenedFileInfo>
+          <option name="caretOffset" value="3977" />
+          <option name="fileUrl" value="file://$PROJECT_DIR$/src/user/user.e2e-spec.ts" />
+        </OpenedFileInfo>
+      </list>
+    </option>
+  </component>
+</project>
