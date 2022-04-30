@@ -3,7 +3,7 @@ image: gitpod/workspace-mongodb
 # List the start up tasks. Learn more https://www.gitpod.io/docs/config-start-tasks/
 tasks:
   - name: mongodb-start
-    before: mongod --replSet rs0 --port 27017 --bind_ip localhost --dbpath /workspace/mongodb/rs0-0  --oplogSize 128
+    before: mongod --replSet rs0 --port 27017 --bind_ip localhost --oplogSize 128
   - name: start:dev
     before: |
       npm i -g @nestjs/cli dotenv-cli
