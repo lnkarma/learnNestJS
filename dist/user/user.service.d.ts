@@ -12,7 +12,10 @@ export declare class UserService {
         token: string;
     }>;
     findAll(): string;
-    findOne(id: number): string;
+    findOne({ id, email }: {
+        id?: string;
+        email?: string;
+    }): Promise<UserEntity | null>;
     update(id: string, updateUserDto: UpdateUserDto): import(".prisma/client").Prisma.Prisma__UserClient<import(".prisma/client").User>;
     remove(id: number): string;
 }

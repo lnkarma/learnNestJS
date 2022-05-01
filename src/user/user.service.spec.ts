@@ -102,4 +102,15 @@ describe('UserService', () => {
       expect(result).toEqual(updatedPrismaUser);
     });
   });
+
+  describe('find One', () => {
+    it('should be defined', () => {
+      expect(service.findOne).toBeDefined();
+    });
+
+    it('should call prisma findOne method', () => {
+      service.findOne({ email: 'test@example.com' });
+      expect(prismaClientMock.user.findUnique).toHaveBeenCalledTimes(1);
+    });
+  });
 });

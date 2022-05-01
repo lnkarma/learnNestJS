@@ -9,7 +9,7 @@ export declare class UserController {
         token: string;
     }>;
     findAll(): string;
-    findOne(id: string): string;
+    findOne(id: string): Promise<import("./entities/user.entity").UserEntity | null>;
     update(id: string, updateUserDto: UpdateUserDto): import(".prisma/client").Prisma.Prisma__UserClient<import(".prisma/client").User>;
     remove(id: string): string;
 }

@@ -16,6 +16,11 @@ let AuthService = class AuthService {
     constructor(userService) {
         this.userService = userService;
     }
+    async validateUser(username, password) {
+        const user = await this.userService.findOne({ email: username });
+        if (!user)
+            return null;
+    }
 };
 AuthService = __decorate([
     (0, common_1.Injectable)(),

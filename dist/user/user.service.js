@@ -46,8 +46,13 @@ let UserService = class UserService {
     findAll() {
         return `This action returns all user`;
     }
-    findOne(id) {
-        return `This action returns a #${id} user`;
+    async findOne({ id, email }) {
+        const user = await this.prisma.user.findUnique({
+            where: { id: id, email: email },
+        });
+        if (!user)
+            return null;
+        return new user_entity_1.UserEntity(user);
     }
     update(id, updateUserDto) {
         return this.prisma.user.update({
