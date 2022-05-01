@@ -15,4 +15,8 @@ describe('EmailService', () => {
   it('should be defined', () => {
     expect(service).toBeDefined();
   });
+
+  it('should have a send email method', () => {
+    expect(service.sendEmail).toBeDefined();
+  });
 });
