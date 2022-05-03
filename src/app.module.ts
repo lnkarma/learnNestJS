@@ -5,7 +5,6 @@ import { UserModule } from './user/user.module';
 import { PrismaModule } from './prisma/prisma.module';
 import { ConfigModule } from '@nestjs/config';
 import { AuthModule } from './auth/auth.module';
-import { EmailService } from './email/email.service';
 import { EmailModule } from './email/email.module';
 import * as Joi from 'joi';
 
@@ -23,6 +22,6 @@ import * as Joi from 'joi';
     EmailModule,
   ],
   controllers: [AppController],
-  providers: [AppService, EmailService],
+  providers: [AppService],
 })
 export class AppModule {}

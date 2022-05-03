@@ -1,6 +1,8 @@
+import { ConfigService } from '@nestjs/config';
+import { SendMailOptions } from 'nodemailer';
 export declare class EmailService {
-    sendEmail(to: string, { subject, message }: {
-        subject: string;
-        message: string;
-    }): void;
+    private configService;
+    private transporter;
+    constructor(configService: ConfigService);
+    sendEmail(sendMailOptions: SendMailOptions): void;
 }

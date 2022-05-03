@@ -14,7 +14,6 @@ const user_module_1 = require("./user/user.module");
 const prisma_module_1 = require("./prisma/prisma.module");
 const config_1 = require("@nestjs/config");
 const auth_module_1 = require("./auth/auth.module");
-const email_service_1 = require("./email/email.service");
 const email_module_1 = require("./email/email.module");
 const Joi = require("joi");
 let AppModule = class AppModule {
@@ -34,7 +33,7 @@ AppModule = __decorate([
             email_module_1.EmailModule,
         ],
         controllers: [app_controller_1.AppController],
-        providers: [app_service_1.AppService, email_service_1.EmailService],
+        providers: [app_service_1.AppService],
     })
 ], AppModule);
 exports.AppModule = AppModule;
