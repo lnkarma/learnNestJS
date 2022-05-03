@@ -14,6 +14,13 @@ import * as Joi from 'joi';
       isGlobal: true,
       validationSchema: Joi.object({
         DATABASE_URL: Joi.string().required(),
+        JWT_SECRET: Joi.string().required(),
+        EMAIL_SERVICE_HOST: Joi.string().required(),
+        EMAIL_SERVICE_PORT: Joi.number().required(),
+        EMAIL_SERVICE_USER: Joi.string().required(),
+        EMAIL_SERVICE_PASS: Joi.string().required(),
+      }).options({
+        abortEarly: false,
       }),
     }),
     UserModule,
