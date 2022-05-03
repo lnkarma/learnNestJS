@@ -32,6 +32,9 @@ export class UserService {
       };
 
       const token = this.jwtService.sign(tokenPayload);
+      // TODO: generage jwt token for email verification.
+      // TODO: send that token for email verification.
+      // TODO: send html with some templace engine.
       this.emailService.sendEmail({
         to: user.email,
         subject: SUBJECT,
