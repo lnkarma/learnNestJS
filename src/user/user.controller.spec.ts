@@ -3,6 +3,7 @@ import { JwtModule } from '@nestjs/jwt';
 import { Test, TestingModule } from '@nestjs/testing';
 import { PrismaClient } from '@prisma/client';
 import { mockDeep } from 'jest-mock-extended';
+import { EmailModule } from 'src/email/email.module';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { createUserDto, user } from './mocks/create-user.mock';
 import { updatedUser, updateUserDto } from './mocks/update-user.mock';
@@ -38,6 +39,7 @@ describe('UserController', () => {
           }),
           inject: [ConfigService],
         }),
+        EmailModule,
       ],
       controllers: [UserController],
       providers: [UserService, PrismaService],

@@ -12,6 +12,7 @@ const user_service_1 = require("./user.service");
 const user_controller_1 = require("./user.controller");
 const jwt_1 = require("@nestjs/jwt");
 const config_1 = require("@nestjs/config");
+const email_module_1 = require("../email/email.module");
 let UserModule = class UserModule {
 };
 UserModule = __decorate([
@@ -24,6 +25,7 @@ UserModule = __decorate([
                 }),
                 inject: [config_1.ConfigService],
             }),
+            email_module_1.EmailModule,
         ],
         controllers: [user_controller_1.UserController],
         providers: [user_service_1.UserService],

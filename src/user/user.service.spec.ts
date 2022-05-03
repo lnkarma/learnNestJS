@@ -11,18 +11,23 @@ import {
 import { updatedPrismaUser, updateUserDto } from './mocks/update-user.mock';
 import { JwtService } from '@nestjs/jwt';
 import { IJwtTokenPayload } from './types/jwtToken.type';
+import { EmailService } from 'src/email/email.service';
+import { SendMailOptions } from 'nodemailer';
+import { SUBJECT, TEXT } from 'src/constants/verifyEmail.constants';
 
 jest.mock('@nestjs/jwt');
+jest.mock('src/email/email.service');
 
 describe('UserService', () => {
   let service: UserService;
   let jwtService: JwtService;
+  let emailService: EmailService;
   let prismaClientMock: DeepMockProxy<PrismaClient>;
 
   beforeEach(async () => {
     prismaClientMock = mockDeep<PrismaClient>();
     const module: TestingModule = await Test.createTestingModule({
-      providers: [UserService, PrismaService, JwtService],
+      providers: [UserService, PrismaService, JwtService, EmailService],
     })
       .overrideProvider(PrismaService)
       .useClass(
@@ -36,6 +41,7 @@ describe('UserService', () => {
 
     service = module.get<UserService>(UserService);
     jwtService = module.get<JwtService>(JwtService);
+    emailService = module.get<EmailService>(EmailService);
   });
 
   it('should be defined', () => {
@@ -86,6 +92,18 @@ describe('UserService', () => {
       expect(prismaClientMock.user.create).toHaveBeenCalledWith({
         data: { ...expectedPassedValue },
       });
+    });
+
+    it('should call sendEmail method', async () => {
+      prismaClientMock.user.create.mockResolvedValueOnce(prismaUser);
+      const sendEmailSpy = jest.spyOn(emailService, 'sendEmail');
+      await service.create(createUserDto);
+      const sendEmailParameters: SendMailOptions = {
+        to: prismaUser.email,
+        subject: SUBJECT,
+        text: TEXT,
+      };
+      expect(sendEmailSpy).toHaveBeenCalledWith(sendEmailParameters);
     });
   });
 

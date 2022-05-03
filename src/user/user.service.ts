@@ -1,6 +1,8 @@
 import { ForbiddenException, Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { PrismaClientKnownRequestError } from '@prisma/client/runtime';
+import { SUBJECT, TEXT } from 'src/constants/verifyEmail.constants';
+import { EmailService } from 'src/email/email.service';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
@@ -9,7 +11,11 @@ import { IJwtTokenPayload } from './types/jwtToken.type';
 
 @Injectable()
 export class UserService {
-  constructor(private prisma: PrismaService, private jwtService: JwtService) {}
+  constructor(
+    private prisma: PrismaService,
+    private jwtService: JwtService,
+    private emailService: EmailService,
+  ) {}
 
   async create(dto: CreateUserDto) {
     try {
@@ -26,6 +32,11 @@ export class UserService {
       };
 
       const token = this.jwtService.sign(tokenPayload);
+      this.emailService.sendEmail({
+        to: user.email,
+        subject: SUBJECT,
+        text: TEXT,
+      });
       return { user, token };
     } catch (error) {
       console.log({ error });
