@@ -1,0 +1,76 @@
+[
+  {
+    "_id": "242fad5e-cc3e-4fe4-b825-fe3e8790d059",
+    "colId": "history",
+    "containerId": "",
+    "name": "{{baseUrl}}/auth/signup",
+    "url": "{{baseUrl}}/auth/signup",
+    "method": "POST",
+    "sortNum": 0,
+    "created": "2022-04-10T08:54:34.034Z",
+    "modified": "2022-04-14T15:03:16.842Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "formencoded",
+      "raw": "",
+      "form": [
+        {
+          "name": "email",
+          "value": "asdf@asdf.asdf"
+        },
+        {
+          "name": "password",
+          "value": "asdsadf"
+        }
+      ]
+    },
+    "tests": []
+  },
+  {
+    "_id": "526db1b9-4815-49a4-8e37-5efa0b8141af",
+    "colId": "history",
+    "containerId": "",
+    "name": "{{baseUrl}}/auth/signin",
+    "url": "{{baseUrl}}/auth/signin",
+    "method": "POST",
+    "sortNum": 0,
+    "created": "2022-04-10T09:46:46.067Z",
+    "modified": "2022-04-10T13:53:56.753Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "formencoded",
+      "raw": "",
+      "form": [
+        {
+          "name": "email",
+          "value": "asdf@asdf.asdf"
+        },
+        {
+          "name": "password",
+          "value": "asdsadf"
+        }
+      ]
+    },
+    "tests": []
+  },
+  {
+    "_id": "8566f386-d76c-4b0d-81f7-f6c9bedcf720",
+    "colId": "history",
+    "containerId": "",
+    "name": "{{baseUrl}}/users/me",
+    "url": "{{baseUrl}}/users/me",
+    "method": "GET",
+    "sortNum": 0,
+    "created": "2022-04-10T10:33:58.130Z",
+    "modified": "2022-04-10T11:11:27.994Z",
+    "headers": [],
+    "params": [],
+    "auth": {
+      "type": "bearer",
+      "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjMsImVtYWlsIjoiYXNkZjJAYXNkZi5hc2RmIiwiaWF0IjoxNjQ5NTg4ODk2LCJleHAiOjE2NDk1ODk3OTZ9.F5hfLRKWLYnCYLQAIxSYcHXMkrKdtGJ5hBO3I2K-vSE"
+    },
+    "tests": []
+  }
+]

@@ -1,0 +1,24 @@
+[
+  {
+    "_id": "5286566e-e5e4-4eff-9ab3-3aee9beaaea4",
+    "colName": "bliss",
+    "created": "2022-04-08T17:59:08.610Z",
+    "sortNum": 10000,
+    "folders": [
+      {
+        "_id": "036dfb39-a209-4b10-aa8a-73c44b610ea5",
+        "name": "auth",
+        "containerId": "",
+        "created": "2022-04-10T10:32:32.400Z",
+        "sortNum": 10000
+      },
+      {
+        "_id": "2d95d09b-a801-4f71-a6b2-f2c5250968b4",
+        "name": "users",
+        "containerId": "",
+        "created": "2022-04-10T10:33:25.659Z",
+        "sortNum": 20000
+      }
+    ]
+  }
+]
