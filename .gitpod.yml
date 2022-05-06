@@ -8,7 +8,6 @@ tasks:
   - name: start:dev
     before: |
       npm i -g @nestjs/cli dotenv-cli
-      sudo apt install sqlite3
     init: | # runs during prebuild
       yarn install
     command: |
